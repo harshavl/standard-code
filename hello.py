@@ -9,5 +9,8 @@ def add( a:int, b:int )->int:
     return a + b
 
 
+def compare_names( first:str, last:str )->bool:
+    return first == last
 
-print( add(1,1) )
+
+print( compare_names("a", "a" ) )
