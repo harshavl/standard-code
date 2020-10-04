@@ -1,18 +1,29 @@
 
 
+#
+#Description: How to write test case for commamd line interface
+#
 
-from hello import speak
-from hello import add, compare_names
-
-def test_hello():
-    assert "harsha" in speak("harsha")
-    assert "vardhana" not in speak("harsha")
-
-
-def test_add():
-    assert 2 == add(1,1)
+from hello import logic
+from click.testing import CliRunner
+from hello import harsha
 
 
-def test_compare_names():
-    assert True == compare_names("harsha", "harsha" )
+def test_logic():
+    assert "vardhana" in logic("harsha")
+    assert 'No Match' in logic("test")
+
+
+def test_harsha_argument():
+    runner = CliRunner()
+    result = runner.invoke( harsha, ['--name', 'harsha' ] )
+    assert result.exit_code == 0
+    assert 'vardhana' in result.output
+
+
+def test_no_match_argument():
+    runner = CliRunner()
+    result = runner.invoke( harsha, ['--name', 'amoghavarsha' ] )
+    assert result.exit_code == 0
+    assert 'No Match' in result.output
 
